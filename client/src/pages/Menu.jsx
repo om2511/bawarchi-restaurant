@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { fetchMenu } from "../api/menuApi";
 import MenuCard from "../components/MenuCard";
+import AnimatedMenuCard from "../components/AnimatedMenuCard";
+import { motion } from "framer-motion";
 
 export default function Menu() {
   const [categories, setCategories] = useState([]);
@@ -79,8 +81,17 @@ export default function Menu() {
               <div className="flex-1 h-px bg-olive-300" />
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
-              {cat.items.map((item) => (
-                <MenuCard key={item._id} item={item} />
+              {cat.items.map((item, idx) => (
+                <motion.div
+                  key={item._id}
+                  initial={{ opacity: 0, y: 30, rotateX: -15 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.03 }}
+                  style={{ perspective: 1000 }}
+                >
+                  <AnimatedMenuCard item={item} />
+                </motion.div>
               ))}
             </div>
           </section>

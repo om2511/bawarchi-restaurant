@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -7,7 +8,6 @@ import Gallery from "./pages/Gallery";
 import Banquet from "./pages/Banquet";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-
 import AdminLogin from "./admin/AdminLogin";
 import AdminLayout from "./admin/AdminLayout";
 import ProtectedRoute from "./admin/ProtectedRoute";
@@ -16,23 +16,38 @@ import MenuManager from "./admin/MenuManager";
 import GalleryManager from "./admin/GalleryManager";
 import ReservationsViewer from "./admin/ReservationsViewer";
 
+const PageWrapper = ({ children }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 16 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -16 }}
+    transition={{ duration: 0.35 }}
+  >
+    {children}
+  </motion.div>
+);
+
 function App() {
+  const location = useLocation();
+
   return (
-    <Routes>
+    <Routes location={location} key={location.pathname}>
       {/* Public site */}
       <Route
         path="/*"
         element={
           <div>
             <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/banquet" element={<Banquet />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-            </Routes>
+            <AnimatePresence mode="wait">
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
+                <Route path="/menu" element={<PageWrapper><Menu /></PageWrapper>} />
+                <Route path="/gallery" element={<PageWrapper><Gallery /></PageWrapper>} />
+                <Route path="/banquet" element={<PageWrapper><Banquet /></PageWrapper>} />
+                <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
+                <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+              </Routes>
+            </AnimatePresence>
             <Footer />
           </div>
         }

@@ -4,6 +4,14 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Brand */}
         <div>
+          <a href="/" className="mb-4 inline-flex items-center gap-3">
+            <img
+              src="/images/logo.jpg"
+              alt="Bawarchi logo"
+              className="h-14 w-14 rounded-full object-cover border border-cream-100/20 shadow-card"
+            />
+            <span className="sr-only">Bawarchi Restaurant</span>
+          </a>
           <h3 className="font-display text-3xl text-cream-100 mb-3">Bawarchi</h3>
           <p className="text-sm text-cream-300 leading-relaxed">
             Restaurant & Banquet, Kalol — where every meal feels like a celebration.

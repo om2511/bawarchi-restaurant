@@ -6,6 +6,7 @@ import menuRoutes from "./routes/menuRoutes.js";
 import galleryRoutes from "./routes/galleryRoutes.js";
 import reservationRoutes from "./routes/reservationRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -23,6 +24,7 @@ app.use("/api/menu", menuRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/reservations", reservationRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/upload", uploadRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

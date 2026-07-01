@@ -62,10 +62,12 @@ export default function Gallery() {
             {filteredImages.map((img, i) => (
               <motion.div
                 key={img._id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: (i % 6) * 0.05 }}
+                transition={{ duration: 0.5, delay: (i % 6) * 0.07 }}
+                whileHover={{ scale: 1.03, rotateY: 4, rotateX: -2, z: 20 }}
+                style={{ transformStyle: "preserve-3d", perspective: 800 }}
                 onClick={() => setLightboxImg(img)}
                 className="group relative aspect-[4/3] rounded-2xl overflow-hidden shadow-sm hover:shadow-card cursor-pointer"
               >
@@ -87,16 +89,22 @@ export default function Gallery() {
 
       {/* Lightbox */}
       {lightboxImg && (
-        <div
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           onClick={() => setLightboxImg(null)}
           className="fixed inset-0 z-50 bg-teal-950/90 flex items-center justify-center p-6 cursor-zoom-out"
         >
-          <img
+          <motion.img
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
             src={lightboxImg.imageUrl}
             alt={lightboxImg.title}
             className="max-w-4xl max-h-[85vh] rounded-xl object-contain"
           />
-        </div>
+        </motion.div>
       )}
     </div>
   );

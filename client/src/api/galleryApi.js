@@ -22,3 +22,19 @@ export const deleteGalleryImage = async (id) => {
   const res = await axios.delete(`${API_URL}/gallery/${id}`, authHeader());
   return res.data;
 };
+
+export const uploadImage = async (file) => {
+  const stored = localStorage.getItem("bawarchi_admin");
+  const token = stored ? JSON.parse(stored).token : null;
+
+  const formData = new FormData();
+  formData.append("image", file);
+
+  const res = await axios.post(`${API_URL}/upload`, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data;
+};

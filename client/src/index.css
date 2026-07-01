@@ -16,3 +16,14 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+.animate-float {
+  animation: float linear infinite;
+}
