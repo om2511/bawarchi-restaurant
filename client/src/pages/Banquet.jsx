@@ -136,10 +136,10 @@ export default function Banquet() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-olive-600 font-heading tracking-[0.3em] uppercase text-sm mb-2">
+          <p className="text-olive-600 text-center sm:text-left font-heading tracking-[0.3em] uppercase text-sm mb-2">
             Facilities
           </p>
-          <h3 className="font-display text-4xl text-teal-900 mb-6">
+          <h3 className="font-display text-4xl text-center sm:text-left text-teal-900 mb-6">
             Everything Your Event Needs
           </h3>
           <ul className="space-y-3">

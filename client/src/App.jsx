@@ -9,6 +9,7 @@ import Gallery from "./pages/Gallery";
 import Banquet from "./pages/Banquet";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 import AdminLogin from "./admin/AdminLogin";
 import AdminLayout from "./admin/AdminLayout";
 import ProtectedRoute from "./admin/ProtectedRoute";
@@ -47,6 +48,7 @@ function App() {
                 <Route path="/banquet" element={<PageWrapper><Banquet /></PageWrapper>} />
                 <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
                 <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+                <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
               </Routes>
             </AnimatePresence>
             <Footer />

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchReservations, updateReservationStatus } from "../api/reservationApi";
+import FoodLoader from "../components/FoodLoader";
 
 const statusColors = {
   pending: "bg-amber-100 text-amber-700 border-amber-200",
@@ -34,11 +35,7 @@ export default function ReservationsViewer() {
   };
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[50vh]">
-        <p className="text-teal-800 font-heading text-lg animate-pulse">Loading reservations list...</p>
-      </div>
-    );
+    return <FoodLoader message="Loading reservations list..." />;
   }
 
   // Apply filters & search
@@ -78,21 +75,41 @@ export default function ReservationsViewer() {
 
       {/* Filters & Search */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-teal-100/50 shadow-xs">
-        {/* Status Tabs */}
-        <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 md:pb-0">
-          {filterTabs.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setFilterStatus(t.id)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold font-heading transition-all whitespace-nowrap ${
-                filterStatus === t.id
-                  ? "bg-teal-800 text-cream-100 shadow-sm"
-                  : "bg-teal-50/50 text-teal-800 hover:bg-teal-50"
-              }`}
+        {/* Status Filter */}
+        <div className="flex items-center gap-3">
+          {/* Mobile: Dropdown */}
+          <div className="sm:hidden relative flex-1">
+            <select
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+              className="w-full appearance-none bg-white border border-teal-200 text-teal-900 font-heading font-semibold text-sm px-4 py-2.5 pr-10 rounded-xl focus:outline-none focus:border-teal-600 cursor-pointer"
             >
-              {t.label}
-            </button>
-          ))}
+              {filterTabs.map((t) => (
+                <option key={t.id} value={t.id}>{t.label}</option>
+              ))}
+            </select>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-teal-700">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </div>
+          {/* Desktop: Pill tabs */}
+          <div className="hidden sm:flex gap-2 overflow-x-auto no-scrollbar pb-1 md:pb-0">
+            {filterTabs.map((t) => (
+              <button
+                key={t.id}
+                onClick={() => setFilterStatus(t.id)}
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold font-heading transition-all whitespace-nowrap ${
+                  filterStatus === t.id
+                    ? "bg-teal-800 text-cream-100 shadow-sm"
+                    : "bg-teal-50/50 text-teal-800 hover:bg-teal-50"
+                }`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Search */}

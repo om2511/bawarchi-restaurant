@@ -97,33 +97,38 @@ export default function About() {
   return (
     <div className="bg-cream-100">
       {/* Hero */}
-      <div className="bg-teal-gradient pt-32 pb-16 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-olive-300 font-heading tracking-[0.3em] uppercase text-sm mb-2"
-        >
-          About Us
-        </motion.p>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-display text-6xl sm:text-7xl text-cream-100 mb-4"
-        >
-          Our Story
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.25 }}
-          className="text-cream-300/80 max-w-2xl mx-auto px-6 leading-relaxed"
-        >
-          Bawarchi Restaurant & Banquet is a family-friendly, vegetarian dining
-          destination in Kalol — built around the idea that good food, good company,
-          and a beautiful setting make every visit special.
-        </motion.p>
+      <div className="relative pt-32 pb-16 text-center overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/banquet-night.png')" }} />
+        <div className="absolute inset-0 bg-teal-950/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-teal-950/20 via-transparent to-teal-950/60" />
+        <div className="relative z-10">
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-olive-300 font-heading tracking-[0.3em] uppercase text-sm mb-2"
+          >
+            About Us
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="font-display text-6xl sm:text-7xl text-cream-100 mb-4"
+          >
+            Our Story
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.25 }}
+            className="text-cream-300/80 max-w-2xl mx-auto px-6 leading-relaxed"
+          >
+            Bawarchi Restaurant & Banquet is a family-friendly, vegetarian dining
+            destination in Kalol — built around the idea that good food, good company,
+            and a beautiful setting make every visit special.
+          </motion.p>
+        </div>
       </div>
 
       {/* Story section */}
@@ -147,10 +152,10 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <p className="text-olive-600 font-heading tracking-[0.3em] uppercase text-sm mb-2">
+          <p className="text-olive-600 font-heading tracking-[0.3em] uppercase text-sm mb-2 text-center md:text-left">
             Who We Are
           </p>
-          <h2 className="font-display text-4xl text-teal-900 mb-5">
+          <h2 className="font-display text-4xl text-teal-900 mb-5 text-center md:text-left">
             A Garden of Flavours
           </h2>
           <p className="text-teal-700/80 leading-relaxed mb-4">
@@ -164,7 +169,7 @@ export default function About() {
             and a banquet hall that hosts up to 500 guests, we're built for every
             kind of gathering — casual, festive, or formal.
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 justify-center md:justify-start">
             {[
               { val: "280+", label: "Menu Items" },
               { val: "500+", label: "Banquet Capacity" },
@@ -187,11 +192,11 @@ export default function About() {
       {/* Offerings & Dining grid */}
       <div className="bg-cream-200 py-16">
         <div className="max-w-5xl mx-auto px-6 grid sm:grid-cols-2 gap-10">
-          <div>
-            <h3 className="font-heading text-2xl text-teal-900 mb-4">
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+            <h3 className="font-heading text-2xl text-teal-900 mb-4 text-center sm:text-left">
               Service Options
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
               {offerings.map((o) => (
                 <span
                   key={o}
@@ -202,11 +207,11 @@ export default function About() {
               ))}
             </div>
           </div>
-          <div>
-            <h3 className="font-heading text-2xl text-teal-900 mb-4">
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+            <h3 className="font-heading text-2xl text-teal-900 mb-4 text-center sm:text-left">
               Dining Options
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
               {diningOptions.map((o) => (
                 <span
                   key={o}
@@ -246,14 +251,14 @@ export default function About() {
 
       {/* Payments / Parking */}
       <div className="max-w-5xl mx-auto px-6 py-16 grid sm:grid-cols-2 gap-10">
-        <div>
-          <h3 className="font-heading text-2xl text-teal-900 mb-4 flex items-center gap-2">
+        <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <h3 className="font-heading text-2xl text-teal-900 mb-4 flex items-center gap-2 justify-center sm:justify-start">
             <svg className="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
             </svg>
             Payment Methods
           </h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
             {payments.map((p) => (
               <span
                 key={p.label}
@@ -264,14 +269,14 @@ export default function About() {
             ))}
           </div>
         </div>
-        <div>
-          <h3 className="font-heading text-2xl text-teal-900 mb-4 flex items-center gap-2">
+        <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <h3 className="font-heading text-2xl text-teal-900 mb-4 flex items-center gap-2 justify-center sm:justify-start">
             <svg className="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
             </svg>
             Parking
           </h3>
-          <ul className="space-y-2">
+          <ul className="space-y-2 inline-block text-left">
             {parking.map((p) => (
               <li key={p} className="flex items-center gap-3 text-teal-700/80">
                 <span className="text-olive-500">✓</span>
@@ -294,7 +299,7 @@ export default function About() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="tel:+917621927000"
-            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-teal-900 font-heading font-semibold px-8 py-3.5 rounded-full shadow-glow transition-all hover:scale-105"
+            className="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-teal-900 font-heading font-semibold px-8 py-3.5 rounded-full shadow-glow transition-all hover:scale-105"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -305,7 +310,7 @@ export default function About() {
             href="https://maps.google.com/?q=Bawarchi+Restaurant+and+Banquet+Kalol"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border border-cream-100/40 hover:border-olive-300 text-cream-100 font-heading font-semibold px-8 py-3.5 rounded-full transition-all hover:scale-105"
+            className="inline-flex items-center justify-center gap-2 border border-cream-100/40 hover:border-olive-300 text-cream-100 font-heading font-semibold px-8 py-3.5 rounded-full transition-all hover:scale-105"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />

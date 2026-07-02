@@ -4,51 +4,22 @@ import SectionHeading from "./SectionHeading";
 
 const featured = [
   {
-    name: "Tandoori Specials",
-    desc: "Smoky paneer tikka, kababs & more from the clay oven",
-    icon: (
-      <svg className="w-12 h-12 text-orange-600 mx-auto" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
-      </svg>
-    ),
-    bg: "from-orange-500/20 to-amber-500/10"
+    name: "Indian Thali",
+    desc: "Authentic dal, sabzi, paneer curry, roti & rice — a complete Punjabi/Gujarati feast.",
+    image: "/images/food-thali.jpg",
+    tag: "Most Loved",
   },
   {
-    name: "Chinese & Oriental",
-    desc: "Manchurian, sizzling noodles, fried rice",
-    icon: (
-      <svg className="w-12 h-12 text-teal-600 mx-auto" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 009-9H3a9 9 0 009 9z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8 12c0-3 1.5-5 4-5s4 2 4 5" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6 12c0-4.5 2.5-7 6-7s6 2.5 6 7" />
-      </svg>
-    ),
-    bg: "from-teal-500/20 to-green-500/10"
+    name: "Steaming Sizzlers",
+    desc: "Paneer sizzlers, grilled vegetables, mashed potatoes, and chef's special herbs sauce.",
+    image: "/images/food-sizzler.jpg",
+    tag: "Chef's Special",
   },
   {
-    name: "Mexican Food",
-    desc: "Tacos, nachos, kasa dila & sizzling platters",
-    icon: (
-      <svg className="w-12 h-12 text-amber-600 mx-auto" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4 14C4 9.58 7.58 6 12 6c4.42 0 8 3.58 8 8v1H4v-1z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6 12c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 15V6" />
-      </svg>
-    ),
-    bg: "from-yellow-500/20 to-orange-400/10"
-  },
-  {
-    name: "Sizzlers",
-    desc: "Bawarchi Special & 10+ continental sizzlers",
-    icon: (
-      <svg className="w-12 h-12 text-olive-600 mx-auto" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v4M8 3v2M16 3v2" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4 14h16v2a4 4 0 01-4 4H8a4 4 0 01-4-4v-2z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2 14h20M7 8h10" />
-      </svg>
-    ),
-    bg: "from-olive-300/20 to-teal-400/10"
+    name: "Sweet Endings",
+    desc: "Golden warm gulab jamuns served with rose petals, saffron, and traditional sweetness.",
+    image: "/images/food-dessert.jpg",
+    tag: "Must Try",
   },
 ];
 
@@ -61,32 +32,36 @@ export default function MenuPreview() {
           title="Flavours From Around the World"
           subtitle="Over 280 dishes spanning Indian, Chinese, Mexican & Thai cuisines — all vegetarian, all crafted with care."
         />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">
           {featured.map((f, i) => (
             <motion.div
               key={f.name}
-              initial={{ opacity: 0, y: 40, rotateY: -15 }}
-              whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              whileHover={{
-                y: -8,
-                rotateY: 5,
-                scale: 1.03,
-                transition: { duration: 0.2 }
-              }}
-              style={{ perspective: 1000, transformStyle: "preserve-3d" }}
-              className={`bg-gradient-to-br ${f.bg} bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-card cursor-default border border-white/60`}
+              transition={{ duration: 0.6, delay: i * 0.12 }}
+              whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.2 } }}
+              className="group relative rounded-3xl overflow-hidden shadow-md hover:shadow-card cursor-pointer border border-teal-100/10 bg-white"
+              style={{ aspectRatio: "4/3" }}
             >
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ repeat: Infinity, duration: 2.5, delay: i * 0.3 }}
-                className="mb-3 block"
-              >
-                {f.icon}
-              </motion.div>
-              <h3 className="font-heading font-semibold text-teal-900 mb-1">{f.name}</h3>
-              <p className="text-sm text-teal-700/70">{f.desc}</p>
+              <img
+                src={f.image}
+                alt={f.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-teal-950 via-teal-950/40 to-transparent" />
+              
+              {/* Tag */}
+              <span className="absolute top-4 left-4 bg-amber-500 text-teal-950 text-[10px] sm:text-xs font-heading font-bold px-3.5 py-1 rounded-full uppercase tracking-wider shadow-md">
+                {f.tag}
+              </span>
+              
+              {/* Text */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                <h3 className="font-heading font-bold text-cream-100 text-xl mb-1.5">{f.name}</h3>
+                <p className="text-cream-300/80 text-xs leading-relaxed font-light">{f.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>

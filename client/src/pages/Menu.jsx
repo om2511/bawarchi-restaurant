@@ -3,6 +3,7 @@ import { fetchMenu } from "../api/menuApi";
 import MenuCard from "../components/MenuCard";
 import AnimatedMenuCard from "../components/AnimatedMenuCard";
 import { motion } from "framer-motion";
+import FoodLoader from "../components/FoodLoader";
 
 export default function Menu() {
   const [categories, setCategories] = useState([]);
@@ -38,11 +39,7 @@ export default function Menu() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-cream-100">
-        <p className="font-heading text-teal-800 text-lg">Loading menu...</p>
-      </div>
-    );
+    return <FoodLoader message="Plating the menu..." />;
   }
 
   return (
@@ -59,8 +56,28 @@ export default function Menu() {
         </p>
       </div>
 
-      {/* Sticky category nav */}
-      <div className="sticky top-20 z-40 bg-cream-100/95 backdrop-blur-sm border-b border-teal-200 mb-10">
+      {/* Mobile category dropdown — sticky */}
+      <div className="md:hidden sticky top-20 z-40 bg-cream-100/95 backdrop-blur-sm border-b border-teal-200 px-6 py-3 mb-6">
+        <div className="relative">
+          <select
+            value={activeSlug}
+            onChange={(e) => scrollToCategory(e.target.value)}
+            className="w-full appearance-none bg-white border border-teal-200 text-teal-900 font-heading font-medium text-sm px-5 py-3.5 pr-10 rounded-2xl shadow-sm focus:outline-none focus:border-teal-600 cursor-pointer"
+          >
+            {categories.map((cat) => (
+              <option key={cat.slug} value={cat.slug}>{cat.name}</option>
+            ))}
+          </select>
+          <span className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-teal-700">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      {/* Sticky category nav - desktop only */}
+      <div className="hidden md:block sticky top-20 z-40 bg-cream-100/95 backdrop-blur-sm border-b border-teal-200 mb-10">
         <div className="max-w-6xl mx-auto px-6 relative flex items-center group">
           
           {/* Left fading overlay */}
@@ -124,7 +141,7 @@ export default function Menu() {
               </h2>
               <div className="flex-1 h-px bg-olive-300" />
             </div>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {cat.items.map((item, idx) => (
                 <motion.div
                   key={item._id}

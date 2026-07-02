@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { fetchReservations, updateReservationStatus } from "../api/reservationApi";
 import { fetchMenuAdmin } from "../api/menuApi";
 import { fetchGallery } from "../api/galleryApi";
+import FoodLoader from "../components/FoodLoader";
 
 export default function Dashboard() {
   const [reservations, setReservations] = useState([]);
@@ -44,11 +45,7 @@ export default function Dashboard() {
   };
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[50vh]">
-        <p className="text-teal-800 font-heading text-lg animate-pulse">Loading dashboard statistics...</p>
-      </div>
-    );
+    return <FoodLoader message="Gathering dashboard statistics..." />;
   }
 
   // Calculate metrics

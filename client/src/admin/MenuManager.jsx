@@ -5,6 +5,7 @@ import {
   updateMenuItem,
   deleteMenuItem,
 } from "../api/menuApi";
+import FoodLoader from "../components/FoodLoader";
 
 const emptyForm = {
   name: "",
@@ -114,11 +115,7 @@ export default function MenuManager() {
   });
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[50vh]">
-        <p className="text-teal-800 font-heading text-lg animate-pulse">Loading menu items database...</p>
-      </div>
-    );
+    return <FoodLoader message="Loading menu database..." />;
   }
 
   return (

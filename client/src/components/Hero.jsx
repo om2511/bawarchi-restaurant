@@ -20,7 +20,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-teal-950/30 via-transparent to-teal-950/80" />
 
       {/* 3D Scene sits on top of image */}
-      <div className="absolute inset-0 z-10 hidden md:block">
+      <div className="absolute inset-0 z-10">
         <Suspense fallback={null}>
           <Hero3DScene />
         </Suspense>
