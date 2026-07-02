@@ -31,7 +31,7 @@ export default function AnimatedMenuCard({ item }) {
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       whileHover={{ scale: 1.02 }}
-      className="bg-white rounded-xl p-4 flex justify-between items-start gap-4 shadow-sm hover:shadow-card border border-teal-100 cursor-default"
+      className="relative bg-white rounded-xl p-4 flex justify-between items-start gap-4 shadow-sm hover:shadow-card border border-teal-100 cursor-default overflow-hidden"
     >
       {/* Sheen overlay */}
       <motion.div

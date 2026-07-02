@@ -23,6 +23,11 @@ export const deleteGalleryImage = async (id) => {
   return res.data;
 };
 
+export const updateGalleryImage = async (id, data) => {
+  const res = await axios.put(`${API_URL}/gallery/${id}`, data, authHeader());
+  return res.data;
+};
+
 export const uploadImage = async (file) => {
   const stored = localStorage.getItem("bawarchi_admin");
   const token = stored ? JSON.parse(stored).token : null;

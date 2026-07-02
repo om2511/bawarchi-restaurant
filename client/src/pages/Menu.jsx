@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { fetchMenu } from "../api/menuApi";
 import MenuCard from "../components/MenuCard";
 import AnimatedMenuCard from "../components/AnimatedMenuCard";
@@ -8,6 +8,7 @@ export default function Menu() {
   const [categories, setCategories] = useState([]);
   const [activeSlug, setActiveSlug] = useState("");
   const [loading, setLoading] = useState(true);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     fetchMenu()
@@ -26,6 +27,13 @@ export default function Menu() {
       const yOffset = -140;
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
+  const scrollNav = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = direction === "left" ? -280 : 280;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
 
@@ -53,20 +61,56 @@ export default function Menu() {
 
       {/* Sticky category nav */}
       <div className="sticky top-20 z-40 bg-cream-100/95 backdrop-blur-sm border-b border-teal-200 mb-10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex gap-3 overflow-x-auto no-scrollbar">
-          {categories.map((cat) => (
-            <button
-              key={cat.slug}
-              onClick={() => scrollToCategory(cat.slug)}
-              className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors ${
-                activeSlug === cat.slug
-                  ? "bg-teal-800 text-cream-100"
-                  : "bg-white text-teal-800 hover:bg-teal-50 border border-teal-200"
-              }`}
-            >
-              {cat.name}
-            </button>
-          ))}
+        <div className="max-w-6xl mx-auto px-6 relative flex items-center group">
+          
+          {/* Left fading overlay */}
+          <div className="absolute left-6 top-0 bottom-0 w-8 bg-gradient-to-r from-cream-100 to-transparent pointer-events-none z-10 hidden md:block" />
+
+          {/* Left Arrow Button */}
+          <button
+            onClick={() => scrollNav("left")}
+            className="hidden md:flex absolute left-4 z-20 w-8 h-8 items-center justify-center rounded-full bg-white/90 shadow-md border border-teal-200 text-teal-800 hover:bg-teal-50 transition-colors"
+            aria-label="Scroll category nav left"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          {/* Scrollable container */}
+          <div
+            ref={scrollRef}
+            className="w-full py-4 flex flex-nowrap gap-2.5 overflow-x-auto no-scrollbar scroll-smooth px-8 md:px-10"
+          >
+            {categories.map((cat) => (
+              <button
+                key={cat.slug}
+                onClick={() => scrollToCategory(cat.slug)}
+                className={`whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-heading font-medium transition-all ${
+                  activeSlug === cat.slug
+                    ? "bg-teal-800 text-cream-100 shadow-sm scale-105"
+                    : "bg-white text-teal-800 hover:bg-teal-50 border border-teal-200"
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Right Arrow Button */}
+          <button
+            onClick={() => scrollNav("right")}
+            className="hidden md:flex absolute right-4 z-20 w-8 h-8 items-center justify-center rounded-full bg-white/90 shadow-md border border-teal-200 text-teal-800 hover:bg-teal-50 transition-colors"
+            aria-label="Scroll category nav right"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* Right fading overlay */}
+          <div className="absolute right-6 top-0 bottom-0 w-8 bg-gradient-to-l from-cream-100 to-transparent pointer-events-none z-10 hidden md:block" />
+
         </div>
       </div>
 
