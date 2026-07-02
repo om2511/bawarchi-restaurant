@@ -87,7 +87,7 @@ This project features a fully responsive customer website, interactive 3D elemen
    CLOUDINARY_API_KEY=your_cloudinary_api_key
    CLOUDINARY_API_SECRET=your_cloudinary_api_secret
    ```
-4. Seed default menu items and admin credentials (admin credentials default to `admin@bawarchi.com` / `admin123`):
+4. Seed default menu items and admin credentials (admin credentials default to `admin@bawarchi.com` / `Bawarchi@2025`):
    ```bash
    npm run seed:admin
    npm run seed
